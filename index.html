@@ -1,221 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CampaignPro | Google Ads Management</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampaignPro</title>
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+html{scroll-behavior:smooth}
+body{
+background:linear-gradient(to bottom,#f8f8f5 0%,#eef2ff 100%);
+overflow-x:hidden;
+font-family:Inter,sans-serif;
+}
 
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
+#progress-bar{
+position:fixed;
+top:0;
+left:0;
+width:0%;
+height:4px;
+background:linear-gradient(90deg,#315CFF,#7C9DFF);
+z-index:9999;
+}
 
-    body {
-      background: linear-gradient(to bottom, #f8f8f5 0%, #f3f5ff 100%);
-    }
+#cursor-glow{
+position:fixed;
+width:320px;
+height:320px;
+background:radial-gradient(circle,rgba(49,92,255,0.14) 0%,transparent 70%);
+pointer-events:none;
+transform:translate(-50%,-50%);
+z-index:-1;
+}
 
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:opacity .9s ease, transform .9s ease;
+}
 
-    .fade-up.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.hero-animate{
+opacity:0;
+transform:translateY(40px);
+animation:heroReveal 1.2s ease forwards;
+}
+
+.hero-animate-delay{
+opacity:0;
+transform:translateY(40px);
+animation:heroReveal 1.2s ease forwards;
+animation-delay:.25s;
+}
+
+@keyframes heroReveal{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.glow{
+position:absolute;
+width:450px;
+height:450px;
+background:rgba(49,92,255,.12);
+filter:blur(100px);
+border-radius:9999px;
+z-index:-2;
+animation:float 12s ease-in-out infinite;
+}
+
+.glow-1{
+top:-120px;
+left:-120px;
+}
+
+.glow-2{
+top:400px;
+right:-140px;
+animation-delay:2s;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(25px)}
+100%{transform:translateY(0)}
+}
+
+.hover-card{
+transition:all .35s ease;
+}
+
+.hover-card:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 60px rgba(49,92,255,.12);
+}
+
+.button-hover{
+transition:all .25s ease;
+}
+
+.button-hover:hover{
+transform:translateY(-2px) scale(1.02);
+}
+
+.parallax{
+transition:transform .15s linear;
+}
+</style>
 </head>
 
-<body class="text-[#111111] font-sans">
+<body class="text-[#111111] relative">
 
-  <!-- NAVBAR -->
-  <header class="w-full border-b border-black/5 sticky top-0 bg-[#F8F8F5]/90 backdrop-blur z-50">
-    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-      <div class="text-xl font-semibold tracking-tight">
-        CampaignPro
-      </div>
+<div id="progress-bar"></div>
+<div id="cursor-glow"></div>
 
-      <a href="#booking"
-        class="px-5 py-2.5 rounded-full bg-[#315CFF] text-white text-sm hover:opacity-90 transition shadow-[0_10px_30px_rgba(49,92,255,0.25)]">
-        Book a Call
-      </a>
-    </div>
-  </header>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
 
-  <!-- HERO -->
-  <section class="max-w-6xl mx-auto px-6 pt-28 pb-24 fade-up">
-    <div class="max-w-4xl">
+<header class="w-full border-b border-black/5 sticky top-0 bg-[#F8F8F5]/85 backdrop-blur z-50">
+<div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+<div class="text-2xl font-semibold tracking-tight">
+Campaign<span class="text-[#315CFF]">Pro</span>
+</div>
 
-      <h1 class="text-5xl md:text-7xl leading-[0.95] tracking-tight font-semibold max-w-5xl">
-        Maximize Every Dollar You Spend on Google Ads.
-      </h1>
+<a href="#booking"
+class="button-hover px-5 py-2.5 rounded-full bg-[#315CFF] text-white text-sm shadow-[0_10px_30px_rgba(49,92,255,0.25)]">
+Book a Call
+</a>
+</div>
+</header>
 
-      <p class="text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
-        Google Ads management focused on generating qualified leads,
-        reducing wasted spend, and helping businesses get more from
-        their PPC budget.
-      </p>
+<section class="max-w-6xl mx-auto px-6 pt-28 pb-24 fade-up">
+<div class="max-w-4xl">
 
-      <div class="flex flex-col sm:flex-row gap-4 mt-10">
-        <a href="#booking"
-          class="px-7 py-4 rounded-full bg-[#315CFF] text-white text-base w-fit hover:opacity-90 transition shadow-[0_12px_35px_rgba(49,92,255,0.28)]">
-          Book a Call
-        </a>
+<div class="inline-flex items-center px-4 py-2 rounded-full bg-[#315CFF]/10 text-[#315CFF] text-sm font-medium mb-8 hero-animate">
+Google Ads Specialist
+</div>
 
-        <div class="flex items-center text-sm text-black/60">
-          Direct communication • No agency bureaucracy
-        </div>
-      </div>
-    </div>
-  </section>
+<h1 class="hero-animate text-5xl md:text-7xl leading-[0.95] tracking-tight font-semibold max-w-5xl">
+Maximize Every Dollar You Spend on Google Ads.
+</h1>
 
-  <!-- SERVICES -->
-  <section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
-    <div class="max-w-2xl mb-16">
-      <p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
-        Services
-      </p>
+<p class="hero-animate-delay text-lg md:text-xl text-black/70 mt-8 max-w-2xl leading-relaxed">
+Google Ads management focused on generating qualified leads,
+reducing wasted spend, and helping businesses get more from
+their PPC budget.
+</p>
 
-      <h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
-        Focused Google Ads Management.
-      </h2>
-    </div>
+<div class="flex flex-col sm:flex-row gap-4 mt-10 hero-animate-delay">
+<a href="#booking"
+class="button-hover px-7 py-4 rounded-full bg-[#315CFF] text-white text-base w-fit shadow-[0_12px_35px_rgba(49,92,255,0.28)]">
+Book a Call
+</a>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white/90 border border-[#315CFF]/10 rounded-3xl p-8 shadow-lg hover:-translate-y-1 transition">
-        <h3 class="text-2xl font-semibold mb-4">Campaign Management</h3>
-        <p class="text-black/65 leading-relaxed">
-          Search campaigns optimized around qualified leads and efficient spend.
-        </p>
-      </div>
+<div class="flex items-center text-sm text-black/60">
+Direct communication • No agency bureaucracy
+</div>
+</div>
+</div>
+</section>
 
-      <div class="bg-white/90 border border-[#315CFF]/10 rounded-3xl p-8 shadow-lg hover:-translate-y-1 transition">
-        <h3 class="text-2xl font-semibold mb-4">Landing Page Optimization</h3>
-        <p class="text-black/65 leading-relaxed">
-          Improve conversion rates with cleaner messaging and stronger user flow.
-        </p>
-      </div>
+<section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
+<div class="max-w-2xl mb-16">
+<p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
+Services
+</p>
 
-      <div class="bg-white/90 border border-[#315CFF]/10 rounded-3xl p-8 shadow-lg hover:-translate-y-1 transition">
-        <h3 class="text-2xl font-semibold mb-4">Tracking & Reporting</h3>
-        <p class="text-black/65 leading-relaxed">
-          Clear reporting and conversion tracking for complete transparency.
-        </p>
-      </div>
-    </div>
-  </section>
+<h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
+Focused Google Ads Management.
+</h2>
+</div>
 
-  <!-- RESULTS -->
-  <section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
-    <div class="max-w-2xl mb-16">
-      <p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
-        Results
-      </p>
+<div class="grid md:grid-cols-3 gap-6">
 
-      <h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
-        Real campaign performance.
-      </h2>
-    </div>
+<div class="hover-card bg-white/90 backdrop-blur border border-[#315CFF]/10 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<h3 class="text-2xl font-semibold mb-4">Campaign Management</h3>
+<p class="text-black/65 leading-relaxed">
+Search campaigns optimized around qualified leads and efficient spend.
+</p>
+</div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="rounded-3xl overflow-hidden shadow-xl hover:-translate-y-1 transition duration-300">
-        <img src="./public/tz-compare.jpeg" class="w-full h-full object-cover" />
-      </div>
+<div class="hover-card bg-white/90 backdrop-blur border border-[#315CFF]/10 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<h3 class="text-2xl font-semibold mb-4">Landing Page Optimization</h3>
+<p class="text-black/65 leading-relaxed">
+Improve conversion rates with cleaner messaging and stronger user flow.
+</p>
+</div>
 
-      <div class="rounded-3xl overflow-hidden shadow-xl hover:-translate-y-1 transition duration-300">
-        <img src="./public/ug-compare.jpeg" class="w-full h-full object-cover" />
-      </div>
-    </div>
-  </section>
+<div class="hover-card bg-white/90 backdrop-blur border border-[#315CFF]/10 rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<h3 class="text-2xl font-semibold mb-4">Tracking & Reporting</h3>
+<p class="text-black/65 leading-relaxed">
+Clear reporting and conversion tracking for complete transparency.
+</p>
+</div>
 
-  <!-- TESTIMONIALS -->
-  <section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
-    <div class="max-w-2xl mb-16">
-      <p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
-        Testimonials
-      </p>
+</div>
+</section>
 
-      <h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
-        Trusted by growing businesses.
-      </h2>
-    </div>
+<section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
+<div class="max-w-2xl mb-16">
+<p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
+Results
+</p>
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="bg-white rounded-3xl p-8 shadow-lg">
-        <p class="text-lg leading-relaxed text-black/75 mb-10">
-          “Communication was fast, reporting was clear, and lead quality improved within the first month.”
-        </p>
-        <div class="font-medium">Local Service Business</div>
-      </div>
+<h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
+Real campaign performance.
+</h2>
+</div>
 
-      <div class="bg-white rounded-3xl p-8 shadow-lg">
-        <p class="text-lg leading-relaxed text-black/75 mb-10">
-          “The campaigns became significantly more efficient after restructuring our account.”
-        </p>
-        <div class="font-medium">E-commerce Brand</div>
-      </div>
+<div class="grid md:grid-cols-2 gap-8">
 
-      <div class="bg-white rounded-3xl p-8 shadow-lg">
-        <p class="text-lg leading-relaxed text-black/75 mb-10">
-          “It felt more like working with a strategic partner than a traditional agency.”
-        </p>
-        <div class="font-medium">Home Services Company</div>
-      </div>
-    </div>
-  </section>
+<div class="hover-card parallax rounded-3xl border border-[#315CFF]/10 overflow-hidden bg-white shadow-[0_10px_50px_rgba(49,92,255,0.08)]">
+<img src="./public/tz-compare.jpeg" class="w-full h-full object-cover">
+</div>
 
-  <!-- BOOKING -->
-  <section id="booking" class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
-    <div class="max-w-3xl mb-12">
-      <p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
-        Book a Call
-      </p>
+<div class="hover-card parallax rounded-3xl border border-[#315CFF]/10 overflow-hidden bg-white shadow-[0_10px_50px_rgba(49,92,255,0.08)]">
+<img src="./public/ug-compare.jpeg" class="w-full h-full object-cover">
+</div>
 
-      <h2 class="text-4xl md:text-5xl tracking-tight font-semibold leading-tight mb-6">
-        Let’s discuss your Google Ads strategy.
-      </h2>
-    </div>
+</div>
+</section>
 
-    <div class="bg-white rounded-3xl overflow-hidden p-4 shadow-xl">
-      <iframe
-        src="https://calendly.com/info-campaignpro/45min"
-        width="100%"
-        height="800"
-        frameborder="0">
-      </iframe>
-    </div>
-  </section>
+<section class="max-w-6xl mx-auto px-6 py-20 border-t border-black/5 fade-up">
+<div class="grid md:grid-cols-3 gap-6 text-center">
 
-  <!-- FOOTER -->
-  <footer class="border-t border-black/5 mt-16 bg-white/50">
-    <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6">
-      <div>
-        <div class="font-semibold text-lg">CampaignPro</div>
-        <div class="text-black/50 text-sm mt-1">
-          Google Ads Management
-        </div>
-      </div>
+<div class="hover-card bg-white/80 rounded-3xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<div class="counter text-5xl font-semibold mb-3" data-target="948">0</div>
+<div class="text-black/60">Thousand Clicks Managed</div>
+</div>
 
-      <div class="text-sm text-black/50">
-        © 2026 CampaignPro. All rights reserved.
-      </div>
-    </div>
-  </footer>
+<div class="hover-card bg-white/80 rounded-3xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<div class="counter text-5xl font-semibold mb-3" data-target="25000">0</div>
+<div class="text-black/60">Conversions Generated</div>
+</div>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
-      });
-    });
+<div class="hover-card bg-white/80 rounded-3xl p-10 shadow-[0_10px_40px_rgba(0,0,0,0.03)]">
+<div class="counter text-5xl font-semibold mb-3" data-target="43000">0</div>
+<div class="text-black/60">Ad Spend Managed</div>
+</div>
 
-    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-  </script>
+</div>
+</section>
+
+<section class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
+<div class="max-w-2xl mb-16">
+<p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
+Testimonials
+</p>
+
+<h2 class="text-4xl md:text-5xl tracking-tight font-semibold">
+Trusted by growing businesses.
+</h2>
+</div>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="hover-card bg-white rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-black/5">
+<p class="text-lg leading-relaxed text-black/75 mb-10">
+“Communication was fast, reporting was clear, and lead quality improved within the first month.”
+</p>
+<div class="font-medium">Local Service Business</div>
+</div>
+
+<div class="hover-card bg-white rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-black/5">
+<p class="text-lg leading-relaxed text-black/75 mb-10">
+“The campaigns became significantly more efficient after restructuring our account.”
+</p>
+<div class="font-medium">E-commerce Brand</div>
+</div>
+
+<div class="hover-card bg-white rounded-3xl p-8 shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-black/5">
+<p class="text-lg leading-relaxed text-black/75 mb-10">
+“It felt more like working with a strategic partner than a traditional agency.”
+</p>
+<div class="font-medium">Home Services Company</div>
+</div>
+
+</div>
+</section>
+
+<section id="booking" class="max-w-6xl mx-auto px-6 py-24 border-t border-black/5 fade-up">
+<div class="max-w-3xl mb-12">
+
+<p class="text-sm uppercase tracking-[0.2em] text-black/40 mb-4">
+Book a Call
+</p>
+
+<h2 class="text-4xl md:text-5xl tracking-tight font-semibold leading-tight mb-6">
+Let’s discuss your Google Ads strategy.
+</h2>
+
+</div>
+
+<div class="bg-white/90 backdrop-blur border border-[#315CFF]/10 rounded-3xl overflow-hidden p-4 shadow-[0_10px_50px_rgba(49,92,255,0.08)]">
+<iframe
+src="https://calendly.com/info-campaignpro/45min"
+width="100%"
+height="800"
+frameborder="0">
+</iframe>
+</div>
+</section>
+
+<footer class="border-t border-black/5 mt-16 bg-white/50 backdrop-blur">
+<div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6">
+
+<div>
+<div class="font-semibold text-lg">CampaignPro</div>
+<div class="text-black/50 text-sm mt-1">
+Google Ads Management
+</div>
+</div>
+
+<div class="text-sm text-black/50">
+© 2026 CampaignPro. All rights reserved.
+</div>
+
+</div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach((entry)=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+},{threshold:0.12});
+
+document.querySelectorAll('.fade-up').forEach((el)=>{
+observer.observe(el);
+});
+
+window.addEventListener('scroll',()=>{
+const scrollTop=document.documentElement.scrollTop;
+const scrollHeight=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+const progress=(scrollTop/scrollHeight)*100;
+document.getElementById('progress-bar').style.width=progress+'%';
+});
+
+const glow=document.getElementById('cursor-glow');
+
+window.addEventListener('mousemove',(e)=>{
+glow.style.left=e.clientX+'px';
+glow.style.top=e.clientY+'px';
+});
+
+const counters=document.querySelectorAll('.counter');
+
+counters.forEach(counter=>{
+const target=+counter.getAttribute('data-target');
+let count=0;
+
+const updateCounter=()=>{
+const increment=target/80;
+
+if(count<target){
+count+=increment;
+counter.innerText=Math.floor(count).toLocaleString();
+requestAnimationFrame(updateCounter);
+}else{
+counter.innerText=target.toLocaleString();
+}
+};
+
+updateCounter();
+});
+
+window.addEventListener('scroll',()=>{
+const scrolled=window.pageYOffset;
+
+document.querySelectorAll('.parallax').forEach(el=>{
+el.style.transform=`translateY(${scrolled * -0.03}px)`;
+});
+});
+</script>
 
 </body>
 </html>
