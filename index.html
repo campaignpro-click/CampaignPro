@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CampaignPro</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "yod20emp5j");
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -345,7 +353,7 @@ We'll discuss your goals and see if we're the right fit.
   
 <div class="bg-white/90 backdrop-blur border border-[#315CFF]/10 rounded-3xl overflow-hidden p-4 shadow-[0_10px_50px_rgba(49,92,255,0.08)]">
 <iframe
-src="https://calendly.com/info-campaignpro/45min"
+src="https://calendly.com/info-campaignpro/45min?embed_domain=www.campaignpro.click&embed_type=Inline"
 width="100%"
 height="800"
 frameborder="0">
@@ -428,6 +436,19 @@ const scrolled=window.pageYOffset;
 document.querySelectorAll('.parallax').forEach(el=>{
 el.style.transform=`translateY(${scrolled * -0.03}px)`;
 });
+});
+
+// Track Calendly booking steps in Clarity
+window.addEventListener('message',function(e){
+if(e.origin!=='https://calendly.com'||!e.data||typeof e.data.event!=='string')return;
+var map={'calendly.date_and_time_selected':'calendly_time_selected','calendly.event_scheduled':'calendly_booked'};
+var name=map[e.data.event];
+if(name&&window.clarity){clarity('event',name);if(name==='calendly_booked')clarity('set','booked','yes');}
+});
+
+// Track clicks on "Book a Call" buttons
+document.querySelectorAll('a[href="#booking"]').forEach(function(a){
+a.addEventListener('click',function(){if(window.clarity)clarity('event','book_call_click');});
 });
 </script>
 
