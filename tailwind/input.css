@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { overflow-x: clip; }
+  h1, h2, h3 { text-wrap: balance; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand text-white font-medium
+           shadow-[0_10px_30px_rgba(49,92,255,0.28)] transition
+           hover:bg-brand-dark hover:-translate-y-0.5
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand;
+  }
+  .card { @apply rounded-3xl bg-white border border-black/5 shadow-[0_10px_40px_rgba(0,0,0,0.03)]; }
+  .eyebrow { @apply text-sm uppercase tracking-[0.18em] text-black/45 font-medium mb-4; }
+  .h2 { @apply text-3xl md:text-5xl font-semibold tracking-tight leading-[1.08]; }
+  .icon-tile { @apply w-11 h-11 shrink-0 rounded-2xl bg-brand/10 flex items-center justify-center; }
+  .icon-tile svg { @apply w-5 h-5; fill: none; stroke: #315CFF; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .check { @apply w-5 h-5 shrink-0 mt-0.5 rounded-full bg-brand/10 p-[3px]; fill: none; stroke: #315CFF; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .step-num { @apply inline-flex w-10 h-10 items-center justify-center rounded-full bg-brand text-white font-semibold; }
+  .stars { @apply text-amber-400 tracking-[0.15em] text-sm; }
+  .faq { @apply px-6; }
+  .faq summary { @apply list-none cursor-pointer py-5 font-semibold text-lg flex justify-between items-center gap-4; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; @apply text-2xl font-normal text-brand transition-transform; }
+  .faq[open] summary::after { transform: rotate(45deg); }
+  .faq p { @apply pb-6 -mt-1 text-black/65 leading-relaxed; }
+}
+
+#progress-bar { position: fixed; top: 0; left: 0; width: 0; height: 3px; background: linear-gradient(90deg, #315CFF, #7C9DFF); z-index: 9999; }
+
+.hero-glow {
+  position: absolute; inset: -20% -10% auto auto; width: 620px; height: 620px; z-index: -1;
+  background: radial-gradient(circle, rgba(49,92,255,0.16) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.js .reveal.show { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
