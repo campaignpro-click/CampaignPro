@@ -50,7 +50,7 @@ gtag('config','G-FH07YVCME2');
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=2">
+<link rel="stylesheet" href="/assets/styles.css?v=3">
 
 <script type="application/ld+json">
 {
@@ -361,7 +361,7 @@ gtag('config','G-FH07YVCME2');
 <!-- Pricing -->
 <section id="pricing" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-28 reveal scroll-mt-16">
   <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-    <div>
+    <div class="min-w-0">
       <p class="eyebrow">Pricing</p>
       <h2 class="h2">Simple, flat pricing. No surprises.</h2>
       <p class="mt-5 text-lg text-black/65 leading-relaxed">Most agencies charge 10–20% of your ad spend, so their fee grows every time you scale. I charge a flat monthly fee. Your ad budget goes straight to Google, and you see every dollar.</p>
@@ -371,22 +371,22 @@ gtag('config','G-FH07YVCME2');
           <caption class="sr-only">CampaignPro compared with a typical agency</caption>
           <thead>
             <tr class="text-left border-b border-black/5">
-              <th scope="col" class="p-4 font-medium text-black/50"></th>
-              <th scope="col" class="p-4 font-semibold text-brand">CampaignPro</th>
-              <th scope="col" class="p-4 font-medium text-black/50">Typical agency</th>
+              <th scope="col" class="p-3 sm:p-4 font-medium text-black/50"></th>
+              <th scope="col" class="p-3 sm:p-4 font-semibold text-brand">CampaignPro</th>
+              <th scope="col" class="p-3 sm:p-4 font-medium text-black/50">Typical agency</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-black/5">
-            <tr><th scope="row" class="p-4 font-medium text-left">Fee</th><td class="p-4">Flat monthly fee</td><td class="p-4 text-black/55">% of ad spend</td></tr>
-            <tr><th scope="row" class="p-4 font-medium text-left">Contract</th><td class="p-4">Month-to-month</td><td class="p-4 text-black/55">Often 6–12 months</td></tr>
-            <tr><th scope="row" class="p-4 font-medium text-left">Setup fee</th><td class="p-4">None</td><td class="p-4 text-black/55">Often charged</td></tr>
-            <tr><th scope="row" class="p-4 font-medium text-left">Who runs your ads</th><td class="p-4">The specialist you talk to</td><td class="p-4 text-black/55">Account manager + team</td></tr>
+            <tr><th scope="row" class="p-3 sm:p-4 font-medium text-left">Fee</th><td class="p-3 sm:p-4">Flat monthly fee</td><td class="p-3 sm:p-4 text-black/55">% of ad spend</td></tr>
+            <tr><th scope="row" class="p-3 sm:p-4 font-medium text-left">Contract</th><td class="p-3 sm:p-4">Month-to-month</td><td class="p-3 sm:p-4 text-black/55">Often 6–12 months</td></tr>
+            <tr><th scope="row" class="p-3 sm:p-4 font-medium text-left">Setup fee</th><td class="p-3 sm:p-4">None</td><td class="p-3 sm:p-4 text-black/55">Often charged</td></tr>
+            <tr><th scope="row" class="p-3 sm:p-4 font-medium text-left">Who runs your ads</th><td class="p-3 sm:p-4">The specialist you talk to</td><td class="p-3 sm:p-4 text-black/55">Account manager + team</td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="card p-8 md:p-10 shadow-float border-2 !border-brand/20">
+    <div class="min-w-0 card p-6 sm:p-8 md:p-10 shadow-float border-2 !border-brand/20">
       <p class="font-semibold text-lg">Google Ads management</p>
       <p class="mt-4 flex items-baseline gap-2"><span class="text-black/55">From</span><span class="text-5xl md:text-6xl font-semibold tracking-tight">$1,000</span><span class="text-black/55">/month</span></p>
       <p class="mt-2 text-sm text-black/55">Ad spend paid directly to Google. Start testing from $500/month.</p>
@@ -453,7 +453,7 @@ gtag('config','G-FH07YVCME2');
 <!-- Booking -->
 <section id="booking" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-28 scroll-mt-16">
   <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
-    <div class="lg:sticky lg:top-28">
+    <div class="min-w-0 lg:sticky lg:top-28">
       <p class="eyebrow">Book a call</p>
       <h2 class="h2">Let's find out what Google Ads can do for your business.</h2>
       <p class="mt-5 text-lg text-black/65 leading-relaxed">Pick a time that works for you. It's a relaxed conversation, not a sales pitch.</p>
@@ -464,11 +464,11 @@ gtag('config','G-FH07YVCME2');
       </ul>
       <p class="mt-8 text-sm text-black/50">Since 2019 · $25M+ managed · US &amp; Canada</p>
     </div>
-    <div class="card overflow-hidden p-2 md:p-3 shadow-float">
+    <div id="calendar" class="min-w-0 card overflow-hidden p-1.5 md:p-3 shadow-float scroll-mt-[72px] md:scroll-mt-24">
       <iframe
         title="Book a free Google Ads strategy call with CampaignPro"
         src="https://calendly.com/info-campaignpro/45min?embed_domain=www.campaignpro.click&embed_type=Inline&hide_gdpr_banner=1"
-        width="100%" height="760" loading="lazy" style="border:0;display:block;min-width:280px"></iframe>
+        width="100%" height="760" loading="lazy" class="calendly-frame" style="border:0;display:block"></iframe>
     </div>
   </div>
 </section>
@@ -525,6 +525,18 @@ if(window.gtag){
 if(name==='calendly_booked'){gtag('event','generate_lead',{method:'calendly'});}
 else{gtag('event',name);}
 }
+});
+
+// "Book" buttons scroll straight to the calendar so the whole calendar is in view
+// (on phones it sits below the intro text; on desktop this clears the section padding)
+var calendar=document.getElementById('calendar');
+document.querySelectorAll('a[href="#booking"]').forEach(function(a){
+a.addEventListener('click',function(e){
+if(!calendar)return;
+e.preventDefault();
+calendar.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+if(history.replaceState)history.replaceState(null,'','#booking');
+});
 });
 
 // Track clicks on "Book a call" buttons (with which button was used)
