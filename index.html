@@ -15,6 +15,14 @@ t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
 y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "yod20emp5j");
 </script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FH07YVCME2"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-FH07YVCME2');
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -438,17 +446,22 @@ el.style.transform=`translateY(${scrolled * -0.03}px)`;
 });
 });
 
-// Track Calendly booking steps in Clarity
+// Track Calendly booking steps in Clarity and GA4
 window.addEventListener('message',function(e){
 if(e.origin!=='https://calendly.com'||!e.data||typeof e.data.event!=='string')return;
 var map={'calendly.date_and_time_selected':'calendly_time_selected','calendly.event_scheduled':'calendly_booked'};
 var name=map[e.data.event];
-if(name&&window.clarity){clarity('event',name);if(name==='calendly_booked')clarity('set','booked','yes');}
+if(!name)return;
+if(window.clarity){clarity('event',name);if(name==='calendly_booked')clarity('set','booked','yes');}
+if(window.gtag){
+if(name==='calendly_booked'){gtag('event','generate_lead',{method:'calendly'});}
+else{gtag('event',name);}
+}
 });
 
 // Track clicks on "Book a Call" buttons
 document.querySelectorAll('a[href="#booking"]').forEach(function(a){
-a.addEventListener('click',function(){if(window.clarity)clarity('event','book_call_click');});
+a.addEventListener('click',function(){if(window.clarity)clarity('event','book_call_click');if(window.gtag)gtag('event','book_call_click');});
 });
 </script>
 
