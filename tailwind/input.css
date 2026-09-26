@@ -52,3 +52,40 @@
 @media (min-width: 768px) {
   .calendly-frame { height: clamp(600px, calc(100svh - 128px), 760px); }
 }
+
+/* Long-form content pages (audit, pricing guides) */
+@layer components {
+  .prose-cp { @apply text-[17px] leading-[1.75] text-black/75; }
+  .prose-cp h2 { @apply text-2xl md:text-3xl font-semibold tracking-tight text-ink mt-16 mb-5 leading-tight scroll-mt-24; }
+  .prose-cp h3 { @apply text-lg font-semibold text-ink; }
+  .prose-cp p { @apply mb-5; }
+  .prose-cp a:not(.btn-primary):not(.cite) { @apply text-brand underline underline-offset-4 decoration-brand/30 hover:decoration-brand; }
+  .prose-cp strong { @apply font-semibold text-ink; }
+  .prose-cp .ticks { @apply space-y-3 mb-6; }
+  .prose-cp .ticks li { @apply flex gap-3; }
+  .prose-cp .bullets { @apply list-disc pl-6 space-y-2.5 mb-6 marker:text-brand; }
+  .prose-cp .checklist { counter-reset: chk; @apply grid sm:grid-cols-2 gap-3 mb-6; }
+  .prose-cp .checklist li { counter-increment: chk; @apply card p-5 text-[15px] leading-relaxed; }
+  .prose-cp .checklist li h3 { @apply text-base mb-1.5 flex items-center gap-2.5; }
+  .prose-cp .checklist li h3::before { content: counter(chk); @apply inline-flex w-7 h-7 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand text-sm font-semibold; }
+  .prose-cp .checklist li p { @apply mb-0 text-black/65; }
+  .prose-cp .steps { counter-reset: stp; @apply space-y-4 mb-6; }
+  .prose-cp .steps li { counter-increment: stp; @apply card p-5 pl-16 relative; }
+  .prose-cp .steps li::before { content: counter(stp); @apply absolute left-5 top-5 inline-flex w-8 h-8 items-center justify-center rounded-full bg-brand text-white text-sm font-semibold; }
+  .prose-cp .steps li h3 { @apply mb-1; }
+  .prose-cp .steps li p { @apply mb-0 text-[15px] text-black/65; }
+  .prose-cp .table-wrap { @apply overflow-x-auto rounded-2xl border border-black/5 bg-white mb-6; }
+  .prose-cp table { @apply w-full text-[15px] leading-snug; }
+  .prose-cp thead th { @apply text-left font-semibold text-ink bg-page/70 p-3 md:p-4 border-b border-black/5; }
+  .prose-cp tbody th { @apply text-left font-medium text-ink p-3 md:p-4 align-top; }
+  .prose-cp tbody td { @apply p-3 md:p-4 align-top text-black/70; }
+  .prose-cp tbody tr + tr { @apply border-t border-black/5; }
+  .prose-cp .cite { @apply text-brand text-[11px] font-medium no-underline ml-0.5 hover:underline; }
+  .prose-cp .formula { @apply rounded-2xl bg-brand/[0.06] border border-brand/15 p-5 mb-6; }
+  .prose-cp .formula p { @apply mb-1 last:mb-0; }
+  .prose-cp .price-box { @apply card p-6 md:p-8 border-2 !border-brand/20 mb-6; }
+  .prose-cp .price-line { @apply flex items-baseline gap-2 mb-5 text-black/55; }
+  .prose-cp .price-line strong { @apply text-5xl font-semibold tracking-tight text-ink; }
+  .prose-cp .sources { @apply list-decimal pl-6 space-y-2 text-[15px] mb-4; }
+  .prose-cp .sources li { @apply scroll-mt-24; }
+}

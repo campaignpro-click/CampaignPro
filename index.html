@@ -50,7 +50,7 @@ gtag('config','G-FH07YVCME2');
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=4">
+<link rel="stylesheet" href="/assets/styles.css?v=5">
 
 <script type="application/ld+json">
 {
@@ -142,6 +142,7 @@ gtag('config','G-FH07YVCME2');
       <a href="#results" class="hover:text-ink transition-colors">Results</a>
       <a href="#how-it-works" class="hover:text-ink transition-colors">How it works</a>
       <a href="#pricing" class="hover:text-ink transition-colors">Pricing</a>
+      <a href="/google-ads-audit" class="hover:text-ink transition-colors">Free audit</a>
       <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
     </nav>
     <a href="#booking" data-cta="header" class="btn-primary px-5 py-2.5 text-sm">Book a free call</a>
@@ -254,7 +255,7 @@ gtag('config','G-FH07YVCME2');
     </div>
     <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
       <a href="#booking" data-cta="problems" class="btn-primary px-7 py-4 justify-center">Get a free audit of your account</a>
-      <p class="text-sm text-white/55">I'll show you exactly where the budget is going, whether we work together or not.</p>
+      <p class="text-sm text-white/55">I'll show you exactly where the budget is going, whether we work together or not. <a href="/google-ads-audit" class="text-white/80 underline underline-offset-4 hover:text-white">See what the audit covers</a>.</p>
     </div>
   </div>
 </section>
@@ -386,6 +387,7 @@ gtag('config','G-FH07YVCME2');
       <p class="eyebrow">Pricing</p>
       <h2 class="h2">Simple, flat pricing. No surprises.</h2>
       <p class="mt-5 text-lg text-black/65 leading-relaxed">Most agencies charge 10–20% of your ad spend, so their fee grows every time you scale. I charge a flat monthly fee. Your ad budget goes straight to Google, and you see every dollar.</p>
+      <p class="mt-4"><a href="/google-ads-management-cost" class="text-brand font-medium underline underline-offset-4 decoration-brand/30 hover:decoration-brand">How much does Google Ads management cost? Full breakdown →</a></p>
 
       <div class="mt-10 overflow-hidden rounded-3xl border border-black/5 bg-white">
         <table class="w-full text-sm">
@@ -496,6 +498,7 @@ gtag('config','G-FH07YVCME2');
         <p>An agency gives you a team and more services, but you often talk to an account manager rather than the person running your ads, and fees are commonly a percentage of spend. An independent specialist is usually more direct and flexible, and you speak to the person doing the work. For most small businesses spending under a few thousand dollars a month, direct access to an experienced specialist matters more than team size.</p>
       </details>
     </div>
+    <p class="mt-8 text-[15px] text-black/65">Go deeper: <a href="/google-ads-management-cost" class="text-brand underline underline-offset-4 decoration-brand/30 hover:decoration-brand">How much does Google Ads management cost?</a> · <a href="/google-ads-audit" class="text-brand underline underline-offset-4 decoration-brand/30 hover:decoration-brand">What a free Google Ads audit checks</a></p>
   </div>
 </section>
 
@@ -540,11 +543,20 @@ gtag('config','G-FH07YVCME2');
       <p class="text-xl font-semibold">Campaign<span class="text-brand">Pro</span></p>
       <p class="text-black/60 text-sm max-w-xs mt-2">Google Ads management for small and medium businesses in the US and Canada, since 2019.</p>
     </div>
-    <nav class="flex flex-col gap-2 text-sm" aria-label="Footer">
-      <a href="#booking" data-cta="footer" class="text-black/70 hover:text-ink">Book a call</a>
-      <a href="/privacy-policy" class="text-black/70 hover:text-ink">Privacy Policy</a>
-      <a href="/terms" class="text-black/70 hover:text-ink">Terms &amp; Conditions</a>
-    </nav>
+    <div class="flex gap-14">
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Resources">
+        <p class="font-semibold mb-1">Resources</p>
+        <a href="/google-ads-audit" class="text-black/70 hover:text-ink">Free Google Ads audit</a>
+        <a href="/google-ads-management-cost" class="text-black/70 hover:text-ink">Google Ads management cost</a>
+        <a href="#faq" class="text-black/70 hover:text-ink">FAQ</a>
+      </nav>
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Company">
+        <p class="font-semibold mb-1">Company</p>
+        <a href="#booking" data-cta="footer" class="text-black/70 hover:text-ink">Book a call</a>
+        <a href="/privacy-policy" class="text-black/70 hover:text-ink">Privacy Policy</a>
+        <a href="/terms" class="text-black/70 hover:text-ink">Terms &amp; Conditions</a>
+      </nav>
+    </div>
   </div>
   <div class="border-t border-black/5 py-6 text-center text-xs text-black/40">© 2026 CampaignPro. All rights reserved.</div>
 </footer>
@@ -554,58 +566,6 @@ gtag('config','G-FH07YVCME2');
   <a href="#booking" data-cta="mobile_sticky" tabindex="-1" class="btn-primary w-full justify-center py-3.5">Book your free strategy call</a>
 </div>
 
-<script>
-// Reveal-on-scroll (content stays visible without JS)
-var io=('IntersectionObserver' in window)?new IntersectionObserver(function(entries){
-entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});
-},{threshold:0,rootMargin:"0px 0px -60px 0px"}):null;
-document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('show');});
-
-// Scroll progress bar + mobile sticky CTA
-var bar=document.getElementById('progress-bar'),mcta=document.getElementById('mobile-cta'),booking=document.getElementById('booking');
-function onScroll(){
-var d=document.documentElement,max=d.scrollHeight-d.clientHeight;
-bar.style.width=(max>0?(d.scrollTop/max)*100:0)+'%';
-var b=booking.getBoundingClientRect(),show=window.scrollY>600&&b.top>window.innerHeight*0.9;
-mcta.classList.toggle('translate-y-full',!show);
-mcta.setAttribute('aria-hidden',show?'false':'true');
-mcta.querySelector('a').tabIndex=show?0:-1;
-}
-window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-// Track Calendly booking steps in Clarity and GA4
-window.addEventListener('message',function(e){
-if(e.origin!=='https://calendly.com'||!e.data||typeof e.data.event!=='string')return;
-var map={'calendly.date_and_time_selected':'calendly_time_selected','calendly.event_scheduled':'calendly_booked'};
-var name=map[e.data.event];
-if(!name)return;
-if(window.clarity){clarity('event',name);if(name==='calendly_booked')clarity('set','booked','yes');}
-if(window.gtag){
-if(name==='calendly_booked'){gtag('event','generate_lead',{method:'calendly'});}
-else{gtag('event',name);}
-}
-});
-
-// "Book" buttons scroll straight to the calendar so the whole calendar is in view
-// (on phones it sits below the intro text; on desktop this clears the section padding)
-var calendar=document.getElementById('calendar');
-document.querySelectorAll('a[href="#booking"]').forEach(function(a){
-a.addEventListener('click',function(e){
-if(!calendar)return;
-e.preventDefault();
-calendar.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
-if(history.replaceState)history.replaceState(null,'','#booking');
-});
-});
-
-// Track clicks on "Book a call" buttons (with which button was used)
-document.querySelectorAll('a[href="#booking"]').forEach(function(a){
-a.addEventListener('click',function(){
-var loc=a.getAttribute('data-cta')||'other';
-if(window.clarity){clarity('event','book_call_click');clarity('set','cta_location',loc);}
-if(window.gtag)gtag('event','book_call_click',{cta_location:loc});
-});
-});
-</script>
+<script src="/assets/site.js?v=1"></script>
 </body>
 </html>
