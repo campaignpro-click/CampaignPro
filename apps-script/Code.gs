@@ -24,7 +24,7 @@ var TURNSTILE_SECRET = '';                // Cloudflare Turnstile secret key (''
 var MAX_SUBMISSIONS_PER_MINUTE = 20;      // global cap against floods
 var MIN_FILL_TIME_MS = 2500;              // humans need at least a few seconds
 
-var HEADERS = ['Submitted at', 'Name', 'Email', 'Phone', 'Website', 'UTM source', 'UTM medium',
+var HEADERS = ['Submitted at', 'Name', 'Email', 'Phone', 'Website', "What's not working", 'UTM source', 'UTM medium',
                'UTM campaign', 'UTM content', 'UTM term', 'fbclid', 'Page'];
 
 // ---------------------------------------------------------------- ENTRY POINTS
@@ -58,7 +58,7 @@ function doPost(e) {
     var sheet = getSheet_();
     var values = {
       'Submitted at': new Date(), 'Name': lead.name, 'Email': lead.email, 'Phone': lead.phone,
-      'Website': lead.website, 'UTM source': lead.utm_source, 'UTM medium': lead.utm_medium,
+      'Website': lead.website, "What's not working": lead.problem, 'UTM source': lead.utm_source, 'UTM medium': lead.utm_medium,
       'UTM campaign': lead.utm_campaign, 'UTM content': lead.utm_content, 'UTM term': lead.utm_term,
       'fbclid': lead.fbclid, 'Page': lead.page
     };
@@ -102,11 +102,13 @@ function validateLead_(d) {
   var website = clean_(d.website, 200);
   var phone = clean_(d.phone, 25);
   var phoneDigits = phone.replace(/\D/g, '');
+  var problem = cleanText_(d.problem, 1000);
 
   if (!name || name.length < 2 || !NAME_RE.test(name)) errors.push('name');
   if (!EMAIL_RE.test(email)) errors.push('email');
   if (!PHONE_RE.test(phone) || phoneDigits.length < 7 || phoneDigits.length > 15) errors.push('phone');
   if (website && !WEBSITE_RE.test(website)) errors.push('website');
+  if (problem && (problem.match(/https?:\/\/|www\./gi) || []).length > 2) errors.push('problem');   // link spam
 
   return {
     ok: errors.length === 0,
@@ -115,6 +117,7 @@ function validateLead_(d) {
     email: email,
     phone: phone,
     website: website,
+    problem: problem,
     utm_source: tracking_(d.utm_source),
     utm_medium: tracking_(d.utm_medium),
     utm_campaign: tracking_(d.utm_campaign),
@@ -137,6 +140,14 @@ function clean_(value, maxLen) {
        .replace(/\s+/g, ' ')
        .trim();
   return s.slice(0, maxLen);
+}
+
+/** Free text (e.g. "What's not working"): same cleaning, but double quotes become
+    single quotes instead of disappearing, and markup-like <...> is removed. */
+function cleanText_(value, maxLen) {
+  if (typeof value !== 'string') return '';
+  var s = value.replace(/<[^>]{0,200}>/g, ' ').replace(/"/g, "'");
+  return clean_(s, maxLen);
 }
 
 /** Tracking values: keep only a safe character set; anything else is dropped entirely. */
@@ -197,6 +208,7 @@ function notify_(lead) {
       'Email: ' + lead.email,
       'Phone: ' + lead.phone,
       'Website: ' + (lead.website || '(not provided)'),
+      "What's not working: " + (lead.problem || '(not provided)'),
       'Source: ' + [lead.utm_source, lead.utm_medium, lead.utm_campaign].filter(String).join(' / ')
     ];
     MailApp.sendEmail({ to: NOTIFY_EMAIL, subject: 'New lead: ' + lead.name, body: lines.join('\n') });

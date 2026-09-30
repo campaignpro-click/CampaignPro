@@ -16,7 +16,8 @@
     name: document.getElementById('f-name'),
     email: document.getElementById('f-email'),
     phone: document.getElementById('f-phone'),
-    website: document.getElementById('f-website')
+    website: document.getElementById('f-website'),
+    problem: document.getElementById('f-problem')
   };
   var statusEl = document.getElementById('form-status');
   var button = document.getElementById('lead-submit');
@@ -85,25 +86,37 @@
       name: fields.name.value.replace(/\s+/g, ' ').trim(),
       email: fields.email.value.trim(),
       phone: fields.phone.value.replace(/\s+/g, ' ').trim(),
-      website: fields.website.value.trim()
+      website: fields.website.value.trim(),
+      problem: fields.problem.value.trim().slice(0, 1000)
     };
   }
 
+  var FIELD_KEYS = ['name', 'email', 'phone', 'website', 'problem'];
+
+  function isValid(k, v) {
+    switch (k) {
+      case 'name': return NAME_RE.test(v.name);
+      case 'email': return EMAIL_RE.test(v.email);
+      case 'phone':
+        var digits = v.phone.replace(/\D/g, '');
+        return PHONE_RE.test(v.phone) && digits.length >= 7 && digits.length <= 15;
+      case 'website': return !v.website || WEBSITE_RE.test(v.website);
+      case 'problem': return (v.problem.match(/https?:\/\/|www\./gi) || []).length <= 2;
+    }
+    return true;
+  }
+
   function validate(v) {
-    var bad = [];
-    if (!NAME_RE.test(v.name)) bad.push('name');
-    if (!EMAIL_RE.test(v.email)) bad.push('email');
-    var digits = v.phone.replace(/\D/g, '');
-    if (!PHONE_RE.test(v.phone) || digits.length < 7 || digits.length > 15) bad.push('phone');
-    if (v.website && !WEBSITE_RE.test(v.website)) bad.push('website');
-    ['name', 'email', 'phone', 'website'].forEach(function (k) { showError(k, bad.indexOf(k) !== -1); });
+    var bad = FIELD_KEYS.filter(function (k) { return !isValid(k, v); });
+    FIELD_KEYS.forEach(function (k) { showError(k, bad.indexOf(k) !== -1); });
     return bad;
   }
 
-  // Re-check a field once the user leaves it (only after a first error)
-  Object.keys(fields).forEach(function (k) {
-    fields[k].addEventListener('blur', function () {
-      if (fields[k].getAttribute('aria-invalid') === 'true') validate(values());
+  // Once a field shows an error, clear it as soon as the person fixes it while typing.
+  // (Not on blur: removing the message on blur shifts the button just as they click it.)
+  FIELD_KEYS.forEach(function (k) {
+    fields[k].addEventListener('input', function () {
+      if (fields[k].getAttribute('aria-invalid') === 'true' && isValid(k, values())) showError(k, false);
     });
   });
 
@@ -148,6 +161,7 @@
       email: v.email,
       phone: v.phone,
       website: v.website,
+      problem: v.problem,
       company_fax: form.company_fax.value,
       elapsed_ms: Date.now() - startedAt,
       turnstile_token: turnstileToken

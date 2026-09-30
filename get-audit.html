@@ -55,7 +55,7 @@ gtag('config','G-FH07YVCME2');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=6">
+<link rel="stylesheet" href="/assets/styles.css?v=7">
 </head>
 
 <body class="bg-page text-ink antialiased">
@@ -112,6 +112,12 @@ gtag('config','G-FH07YVCME2');
               <label for="f-website" class="lp-label">Website <span class="font-normal text-black/45">(optional)</span></label>
               <input id="f-website" name="website" type="text" class="lp-input" autocomplete="url" inputmode="url" maxlength="200" placeholder="yourbusiness.com">
               <p class="lp-error" id="e-website" hidden>Please enter a valid website, e.g. yourbusiness.com</p>
+            </div>
+
+            <div>
+              <label for="f-problem" class="lp-label">What's not working? <span class="font-normal text-black/45">(optional)</span></label>
+              <textarea id="f-problem" name="problem" rows="3" class="lp-input resize-y min-h-[92px]" maxlength="1000" placeholder="e.g. Lots of clicks but few calls, cost per lead keeps rising, not sure tracking works…"></textarea>
+              <p class="lp-error" id="e-problem" hidden>Please remove the links and describe the situation in your own words.</p>
             </div>
 
             <!-- Honeypot: invisible to people, bots fill it in -->
@@ -184,6 +190,6 @@ gtag('config','G-FH07YVCME2');
 </footer>
 
 <script src="/assets/site.js?v=1"></script>
-<script src="/assets/lead-form.js?v=2"></script>
+<script src="/assets/lead-form.js?v=4"></script>
 </body>
 </html>
