@@ -206,6 +206,10 @@
       });
   });
 
+  // ---- Logo click (tracked, so you can see how many leave the page this way)
+  var logo = document.querySelector('[data-lp-logo]');
+  if (logo) logo.addEventListener('click', function () { track('lp_logo_click'); });
+
   // ---- After submitting: optional inline calendar (no page change)
   var calBtn = document.getElementById('show-calendar');
   if (calBtn) {
