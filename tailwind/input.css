@@ -48,7 +48,7 @@
 }
 
 /* Calendly: size the calendar to fit one screen below the sticky header */
-.calendly-frame { height: clamp(540px, calc(100svh - 84px), 760px); }
+.calendly-frame { height: clamp(540px, calc(100svh - 32px), 760px); }
 @media (min-width: 768px) {
   .calendly-frame { height: clamp(600px, calc(100svh - 128px), 760px); }
 }
