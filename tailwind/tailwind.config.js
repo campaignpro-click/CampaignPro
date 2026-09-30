@@ -3,7 +3,7 @@
  *  npx tailwindcss@3 -c tailwind/tailwind.config.js -i tailwind/input.css -o assets/styles.css --minify
  */
 module.exports = {
-  content: ['./*.html'],
+  content: ['./*.html', './assets/*.js'],
   theme: {
     extend: {
       colors: {
