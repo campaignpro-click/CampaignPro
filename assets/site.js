@@ -54,4 +54,25 @@ if(window.clarity){clarity('event','book_call_click');clarity('set','cta_locatio
 if(window.gtag)gtag('event','book_call_click',{cta_location:loc});
 });
 });
+
+// Mobile menu (three-line button in the header)
+var menuBtn=document.querySelector('[data-menu-toggle]'),menuPanel=document.getElementById('mobile-menu');
+if(menuBtn&&menuPanel){
+var setMenu=function(open){
+menuPanel.classList.toggle('hidden',!open);
+menuBtn.setAttribute('aria-expanded',open?'true':'false');
+menuBtn.setAttribute('aria-label',open?'Close menu':'Open menu');
+menuBtn.querySelector('.menu-icon-open').classList.toggle('hidden',open);
+menuBtn.querySelector('.menu-icon-close').classList.toggle('hidden',!open);
+};
+menuBtn.addEventListener('click',function(){
+var open=menuPanel.classList.contains('hidden');
+setMenu(open);
+if(open){try{if(window.gtag)gtag('event','mobile_menu_open');if(window.clarity)clarity('event','mobile_menu_open');}catch(e){}}
+});
+menuPanel.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menuPanel.classList.contains('hidden')){setMenu(false);menuBtn.focus();}});
+document.addEventListener('click',function(e){if(!menuPanel.classList.contains('hidden')&&!menuPanel.contains(e.target)&&!menuBtn.contains(e.target))setMenu(false);});
+window.addEventListener('resize',function(){if(window.innerWidth>=768)setMenu(false);});
+}
 })();
