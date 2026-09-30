@@ -15,6 +15,7 @@
   var fields = {
     name: document.getElementById('f-name'),
     email: document.getElementById('f-email'),
+    phone: document.getElementById('f-phone'),
     website: document.getElementById('f-website')
   };
   var statusEl = document.getElementById('form-status');
@@ -23,6 +24,7 @@
 
   var EMAIL_RE = /^[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,24}$/;
   var NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}' .\-]{1,79}$/u;
+  var PHONE_RE = /^\+?[0-9 ().\-]{7,25}$/;
   var WEBSITE_RE = /^(https?:\/\/)?([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}(:\d{2,5})?(\/[A-Za-z0-9._~%!$&'()*+,;=:@\/?#-]*)?$/i;
 
   // ---- Tracking parameters from the ad click (UTM tags, fbclid)
@@ -82,6 +84,7 @@
     return {
       name: fields.name.value.replace(/\s+/g, ' ').trim(),
       email: fields.email.value.trim(),
+      phone: fields.phone.value.replace(/\s+/g, ' ').trim(),
       website: fields.website.value.trim()
     };
   }
@@ -90,8 +93,10 @@
     var bad = [];
     if (!NAME_RE.test(v.name)) bad.push('name');
     if (!EMAIL_RE.test(v.email)) bad.push('email');
+    var digits = v.phone.replace(/\D/g, '');
+    if (!PHONE_RE.test(v.phone) || digits.length < 7 || digits.length > 15) bad.push('phone');
     if (v.website && !WEBSITE_RE.test(v.website)) bad.push('website');
-    ['name', 'email', 'website'].forEach(function (k) { showError(k, bad.indexOf(k) !== -1); });
+    ['name', 'email', 'phone', 'website'].forEach(function (k) { showError(k, bad.indexOf(k) !== -1); });
     return bad;
   }
 
@@ -141,6 +146,7 @@
     var payload = {
       name: v.name,
       email: v.email,
+      phone: v.phone,
       website: v.website,
       company_fax: form.company_fax.value,
       elapsed_ms: Date.now() - startedAt,

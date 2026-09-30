@@ -48,6 +48,9 @@ Only needed if you start receiving spam.
 
 ## Updating the script later
 
+If your sheet was created before the Phone field existed, the script adds a **Phone** column at the end automatically. Old rows are left untouched.
+
+
 Always use **Deploy → Manage deployments → edit (pencil) → Version: New version → Deploy**.
 Creating a *new* deployment instead would give you a new URL that the page doesn't know about.
 
@@ -63,6 +66,6 @@ All checks run in the script, so they can't be bypassed by calling the URL direc
 
 ## Columns in the sheet
 
-Submitted at · Name · Email · Website · UTM source · UTM medium · UTM campaign · UTM content · UTM term · fbclid · Page
+Submitted at · Name · Email · Phone · Website · UTM source · UTM medium · UTM campaign · UTM content · UTM term · fbclid · Page
 
 > Never put your Turnstile **secret** key in this repository. It belongs only inside the Apps Script editor.

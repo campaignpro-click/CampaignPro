@@ -24,7 +24,7 @@ var TURNSTILE_SECRET = '';                // Cloudflare Turnstile secret key (''
 var MAX_SUBMISSIONS_PER_MINUTE = 20;      // global cap against floods
 var MIN_FILL_TIME_MS = 2500;              // humans need at least a few seconds
 
-var HEADERS = ['Submitted at', 'Name', 'Email', 'Website', 'UTM source', 'UTM medium',
+var HEADERS = ['Submitted at', 'Name', 'Email', 'Phone', 'Website', 'UTM source', 'UTM medium',
                'UTM campaign', 'UTM content', 'UTM term', 'fbclid', 'Page'];
 
 // ---------------------------------------------------------------- ENTRY POINTS
@@ -56,13 +56,22 @@ function doPost(e) {
     lock.waitLock(10000);
     locked = true;
     var sheet = getSheet_();
-    var row = [new Date()].concat([
-      lead.name, lead.email, lead.website,
-      lead.utm_source, lead.utm_medium, lead.utm_campaign, lead.utm_content, lead.utm_term,
-      lead.fbclid, lead.page
-    ].map(toSafeCell_));
+    var values = {
+      'Submitted at': new Date(), 'Name': lead.name, 'Email': lead.email, 'Phone': lead.phone,
+      'Website': lead.website, 'UTM source': lead.utm_source, 'UTM medium': lead.utm_medium,
+      'UTM campaign': lead.utm_campaign, 'UTM content': lead.utm_content, 'UTM term': lead.utm_term,
+      'fbclid': lead.fbclid, 'Page': lead.page
+    };
+    // Write by column name, so rows stay aligned even if columns were added later
+    var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    var row = header.map(function (h) {
+      if (!Object.prototype.hasOwnProperty.call(values, h)) return '';
+      return h === 'Submitted at' ? values[h] : toSafeCell_(values[h]);
+    });
     var r = sheet.getLastRow() + 1;
-    sheet.getRange(r, 2, 1, row.length - 1).setNumberFormat('@');   // text columns stay plain text
+    sheet.getRange(r, 1, 1, row.length).setNumberFormat('@');         // plain text: no formulas
+    var dateCol = header.indexOf('Submitted at');
+    if (dateCol !== -1) sheet.getRange(r, dateCol + 1).setNumberFormat('yyyy-mm-dd hh:mm');
     sheet.getRange(r, 1, 1, row.length).setValues([row]);
 
     if (NOTIFY_EMAIL) notify_(lead);
@@ -83,6 +92,7 @@ function doGet() {
 var EMAIL_RE = /^[A-Za-z0-9._%+-]{1,64}@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*\.[A-Za-z]{2,24}$/;
 var NAME_RE = /^[\p{L}\p{M}][\p{L}\p{M}' .\-]{0,79}$/u;
 var WEBSITE_RE = /^(https?:\/\/)?([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,24}(:\d{2,5})?(\/[A-Za-z0-9._~%!$&'()*+,;=:@\/?#-]*)?$/i;
+var PHONE_RE = /^\+?[0-9 ().\-]{7,25}$/;
 var TRACK_RE = /^[A-Za-z0-9 _.,:;|\/()+\-]{0,150}$/;
 
 function validateLead_(d) {
@@ -90,9 +100,12 @@ function validateLead_(d) {
   var name = clean_(d.name, 80);
   var email = clean_(d.email, 254).toLowerCase();
   var website = clean_(d.website, 200);
+  var phone = clean_(d.phone, 25);
+  var phoneDigits = phone.replace(/\D/g, '');
 
   if (!name || name.length < 2 || !NAME_RE.test(name)) errors.push('name');
   if (!EMAIL_RE.test(email)) errors.push('email');
+  if (!PHONE_RE.test(phone) || phoneDigits.length < 7 || phoneDigits.length > 15) errors.push('phone');
   if (website && !WEBSITE_RE.test(website)) errors.push('website');
 
   return {
@@ -100,6 +113,7 @@ function validateLead_(d) {
     errors: errors,
     name: name,
     email: email,
+    phone: phone,
     website: website,
     utm_source: tracking_(d.utm_source),
     utm_medium: tracking_(d.utm_medium),
@@ -161,9 +175,15 @@ function getSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(HEADERS);
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold');
     sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+    return sheet;
+  }
+  // Existing sheet: add any new columns (e.g. Phone) at the end without moving old data
+  var header = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var missing = HEADERS.filter(function (h) { return header.indexOf(h) === -1; });
+  if (missing.length) {
+    sheet.getRange(1, header.length + 1, 1, missing.length).setValues([missing]).setFontWeight('bold');
   }
   return sheet;
 }
@@ -175,6 +195,7 @@ function notify_(lead) {
       '',
       'Name: ' + lead.name,
       'Email: ' + lead.email,
+      'Phone: ' + lead.phone,
       'Website: ' + (lead.website || '(not provided)'),
       'Source: ' + [lead.utm_source, lead.utm_medium, lead.utm_campaign].filter(String).join(' / ')
     ];
