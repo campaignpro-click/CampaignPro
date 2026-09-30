@@ -50,7 +50,7 @@ gtag('config','G-FH07YVCME2');
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/styles.css?v=9">
+<link rel="stylesheet" href="/assets/styles.css?v=10">
 
 <script type="application/ld+json">
 {
@@ -148,6 +148,19 @@ gtag('config','G-FH07YVCME2');
       <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
     </nav>
     <a href="#booking" data-cta="header" class="btn-primary hidden md:inline-flex px-5 py-2.5 text-sm">Book a free call</a>
+    <button type="button" class="md:hidden -mr-2 inline-flex items-center justify-center w-11 h-11 rounded-xl text-ink hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="menu-icon-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-icon-close hidden" d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden absolute inset-x-0 top-full bg-page border-b border-black/5 shadow-float" data-menu-panel>
+    <nav class="max-w-6xl mx-auto px-5 pt-1 pb-5 flex flex-col text-base font-medium" aria-label="Mobile">
+      <a href="#results" class="py-3.5 border-b border-black/5 text-ink/80 hover:text-ink">Results</a>
+      <a href="#pricing" class="py-3.5 border-b border-black/5 text-ink/80 hover:text-ink">Pricing</a>
+      <a href="/google-ads-audit" class="py-3.5 border-b border-black/5 text-ink/80 hover:text-ink">Free audit</a>
+      <a href="/industries" class="py-3.5 border-b border-black/5 text-ink/80 hover:text-ink">Industries</a>
+      <a href="#faq" class="py-3.5 border-b border-black/5 text-ink/80 hover:text-ink">FAQ</a>
+      <a href="#booking" data-cta="mobile_menu" class="btn-primary justify-center mt-5 py-3.5">Book a free call</a>
+    </nav>
   </div>
 </header>
 
@@ -583,6 +596,6 @@ gtag('config','G-FH07YVCME2');
   <a href="#booking" data-cta="mobile_sticky" tabindex="-1" class="btn-primary w-full justify-center py-3.5">Book your free strategy call</a>
 </div>
 
-<script src="/assets/site.js?v=1"></script>
+<script src="/assets/site.js?v=2"></script>
 </body>
 </html>
