@@ -89,3 +89,13 @@
   .prose-cp .sources { @apply list-decimal pl-6 space-y-2 text-[15px] mb-4; }
   .prose-cp .sources li { @apply scroll-mt-24; }
 }
+
+/* Landing page form (get-audit.html) */
+@layer components {
+  .lp-label { @apply block text-sm font-medium text-ink mb-1.5; }
+  .lp-input { @apply w-full rounded-xl border border-black/15 bg-white px-4 py-3.5 text-base text-ink placeholder:text-black/35 transition
+                     focus:outline-none focus:border-brand focus:ring-4 focus:ring-brand/15; }
+  .lp-input[aria-invalid="true"] { @apply border-red-500 focus:ring-red-500/15; }
+  .lp-error { @apply text-sm text-red-600 mt-1.5; }
+  .lp-hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+}
