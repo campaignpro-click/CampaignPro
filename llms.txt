@@ -22,6 +22,7 @@ CampaignPro is run by a single Google Ads specialist, so clients work directly w
 - [Pricing](https://www.campaignpro.click/#pricing): flat monthly fee compared with typical agency pricing
 - [Free Google Ads audit](https://www.campaignpro.click/google-ads-audit): what a Google Ads audit checks (10 areas), common problems it finds, and how CampaignPro's free audit works
 - [How much does Google Ads management cost?](https://www.campaignpro.click/google-ads-management-cost): typical fees (10–20% of ad spend, flat fees around $1,000–$3,000/month, hourly $75–$250+), pricing models, hidden costs, with sources
+- [Google Ads break-even cost per lead calculator](https://www.campaignpro.click/google-ads-cost-per-lead-calculator): free calculator for the most you can pay per lead before losing money, from customer value, profit margin and lead-to-customer rate; also shows break-even ROAS and a monthly profit estimate
 - [Google Ads for HVAC companies](https://www.campaignpro.click/google-ads-for-hvac-companies): costs (about $128 per lead on average for AC and heating), campaign structure, keywords and negatives, Local Services Ads, seasonality
 - [Google Ads for cleaning companies](https://www.campaignpro.click/google-ads-for-cleaning-companies): costs (about $47 per lead on average), residential vs. commercial campaigns, keywords and negatives
 - [Google Ads for accountants and CPA firms](https://www.campaignpro.click/google-ads-for-accountants): campaigns by service, negative keywords, tax-season planning

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Ads Break-Even Cost Per Lead Calculator | CampaignPro</title>
+<meta name="description" content="Free calculator: find the most you can pay per lead on Google Ads before you lose money. Enter your job value, profit margin and close rate.">
+<link rel="canonical" href="https://www.campaignpro.click/google-ads-cost-per-lead-calculator">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#315CFF">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CampaignPro">
+<meta property="og:title" content="Google Ads Break-Even Cost Per Lead Calculator">
+<meta property="og:description" content="Free calculator: find the most you can pay per lead on Google Ads before you lose money. Enter your job value, profit margin and close rate.">
+<meta property="og:url" content="https://www.campaignpro.click/google-ads-cost-per-lead-calculator">
+<meta property="og:image" content="https://www.campaignpro.click/public/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Google Ads Break-Even Cost Per Lead Calculator">
+<meta name="twitter:description" content="Free calculator: find the most you can pay per lead on Google Ads before you lose money. Enter your job value, profit margin and close rate.">
+<meta name="twitter:image" content="https://www.campaignpro.click/public/og-image.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<script>document.documentElement.classList.replace('no-js','js');</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "yod20emp5j");
+</script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FH07YVCME2"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-FH07YVCME2');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://calendly.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css?v=10">
+
+<style>
+/* Calculator layout (kept here so the page doesn't depend on a Tailwind rebuild) */
+.bc-container{max-width:64rem;margin:0 auto;padding:0 1.25rem}
+@media(min-width:768px){.bc-container{padding:0 1.5rem}}
+.bc-wrap{display:grid;gap:1.25rem}
+@media(min-width:900px){.bc-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+.bc-wrap [hidden]{display:none!important}
+.bc-field{margin-bottom:1.15rem}
+.bc-affix{position:relative}
+.bc-affix .bc-pre,.bc-affix .bc-suf{position:absolute;top:50%;transform:translateY(-50%);color:rgba(0,0,0,.42);pointer-events:none}
+.bc-affix .bc-pre{left:1rem}
+.bc-affix .bc-suf{right:1rem}
+.bc-affix.has-pre .lp-input{padding-left:2rem}
+.bc-affix.has-suf .lp-input{padding-right:2.4rem}
+.bc-hint{font-size:.8125rem;line-height:1.45;color:rgba(0,0,0,.5);margin-top:.35rem}
+.bc-divider{margin:1.5rem 0 1.15rem;padding-top:1.25rem;border-top:1px solid rgba(0,0,0,.08)}
+.bc-label-sm{font-size:.8125rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,.5)}
+.bc-big{font-size:clamp(2.75rem,9vw,4rem);font-weight:600;letter-spacing:-.03em;line-height:1;color:#111;margin-top:.6rem}
+.bc-stats{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.5rem}
+.bc-stat{border-radius:1rem;background:#F8F8F5;padding:.9rem 1rem;margin:0}
+.bc-stat dt{font-size:.8125rem;line-height:1.35;color:rgba(0,0,0,.55)}
+.bc-stat dd{font-size:1.2rem;font-weight:600;margin:.2rem 0 0;color:#111}
+.bc-box{margin-top:1.25rem;border-radius:1rem;border:1px solid rgba(0,0,0,.08);border-left-width:4px;padding:1rem 1.1rem;background:#fff}
+.bc-box p{margin:0}
+.bc-box .bc-box-title{font-weight:600;color:#111;margin-bottom:.35rem}
+.bc-box .bc-box-body{font-size:.95rem;line-height:1.6;color:rgba(0,0,0,.7)}
+.bc-box[data-status="healthy"]{border-left-color:#16a34a}
+.bc-box[data-status="thin"]{border-left-color:#d97706}
+.bc-box[data-status="losing"]{border-left-color:#dc2626}
+.bc-box.bc-monthly{border-left-color:#315CFF}
+.bc-rows{margin:.6rem 0 0;padding:0}
+.bc-rows div{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-top:1px solid rgba(0,0,0,.06);font-size:.95rem}
+.bc-rows div:first-child{border-top:0}
+.bc-rows dt{color:rgba(0,0,0,.6)}
+.bc-rows dd{margin:0;font-weight:600;color:#111;text-align:right}
+.bc-rows .bc-net dd{font-size:1.1rem}
+.bc-rows .bc-net[data-sign="neg"] dd{color:#b91c1c}
+.bc-actions{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;margin-top:.5rem}
+.bc-link{background:none;border:0;padding:0;font:inherit;font-size:.875rem;font-weight:500;color:rgba(0,0,0,.6);text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(0,0,0,.2);cursor:pointer}
+.bc-link:hover{color:#111}
+.bc-link:focus-visible{outline:2px solid #315CFF;outline-offset:3px;border-radius:4px}
+.bc-note{font-size:.8125rem;color:rgba(0,0,0,.45);margin-top:1rem;line-height:1.5}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator#webpage",
+      "url": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator",
+      "name": "Google Ads Break-Even Cost Per Lead Calculator | CampaignPro",
+      "description": "Free calculator: find the most you can pay per lead on Google Ads before you lose money. Enter your job value, profit margin and close rate.",
+      "isPartOf": {
+        "@id": "https://www.campaignpro.click/#website"
+      },
+      "about": {
+        "@id": "https://www.campaignpro.click/#business"
+      },
+      "breadcrumb": {
+        "@id": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator#breadcrumb"
+      },
+      "primaryImageOfPage": "https://www.campaignpro.click/public/og-image.png",
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.campaignpro.click/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cost per lead calculator",
+          "item": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator"
+        }
+      ]
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator#tool",
+      "name": "Google Ads Break-Even Cost Per Lead Calculator",
+      "url": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any (web browser)",
+      "description": "Calculates the most a business can pay per lead on Google Ads before losing money, from average customer value, profit margin and lead-to-customer rate.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@id": "https://www.campaignpro.click/#business"
+      }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.campaignpro.click/#business",
+      "name": "CampaignPro",
+      "url": "https://www.campaignpro.click/",
+      "sameAs": [
+        "https://www.linkedin.com/company/campaignpro-click",
+        "https://www.facebook.com/campaignproppc",
+        "https://x.com/Campaignpro_ppc"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.campaignpro.click/#website",
+      "url": "https://www.campaignpro.click/",
+      "name": "CampaignPro"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.campaignpro.click/google-ads-cost-per-lead-calculator#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a good cost per lead on Google Ads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no single good number. A good cost per lead is one comfortably below your break-even cost per lead, which depends on what a customer is worth in profit and how many leads become customers. Industry averages give context: about $47 for cleaning services to about $129 for plumbing, according to LocaliQ's 2025 home services benchmarks. Your own break-even matters more than any average."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I enter revenue or profit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter the average revenue per customer and your profit margin separately. The margin should reflect what you keep after the cost of doing the work, such as labor, materials, fuel and subcontractors, before ad spend. Break-even depends on profit, not revenue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is break-even ROAS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Return on ad spend (ROAS) is revenue divided by ad spend. Break-even ROAS is 1 divided by your profit margin. With a 40% margin it is 2.5, meaning you need $2.50 of revenue for every $1 of ad spend just to cover the cost of the work and the ads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I don't know my lead-to-customer rate. What should I enter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Look at your last 20 to 30 leads and count how many became paying customers, then divide customers by leads. If you can't tell yet, try several rates, such as 10%, 20% and 30%, to see how much your break-even cost per lead changes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the calculator include my management fee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only if you enter it. When you add your monthly ad spend, current cost per lead and an optional management fee, the calculator shows your all-in cost per lead and your estimated monthly profit after both."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How accurate are the results?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The results are planning estimates based on the numbers you enter. Real results move with seasonality, lead quality and how quickly you follow up, so use the output as an upper limit on what you should pay per lead rather than a forecast."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="bg-page text-ink antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
+
+<div id="progress-bar" aria-hidden="true"></div>
+
+<header class="relative md:sticky md:top-0 z-50 border-b border-black/5 bg-page/85 backdrop-blur">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 h-16 md:h-[72px] flex items-center justify-between gap-6">
+    <a href="/" class="text-xl md:text-2xl font-semibold tracking-tight" aria-label="CampaignPro home">Campaign<span class="text-brand">Pro</span></a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-black/65" aria-label="Main">
+      <a href="/#results" class="hover:text-ink transition-colors">Results</a>
+      <a href="/google-ads-audit" class="hover:text-ink transition-colors">Free audit</a>
+      <a href="/google-ads-management-cost" class="hover:text-ink transition-colors">Pricing</a>
+      <a href="/industries" class="hover:text-ink transition-colors">Industries</a>
+    </nav>
+    <a href="#booking" data-cta="header" class="btn-primary hidden md:inline-flex px-5 py-2.5 text-sm">Book a free call</a>
+    <button type="button" class="md:hidden -mr-2 inline-flex items-center justify-center w-11 h-11 rounded-xl text-ink hover:bg-black/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu">
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="menu-icon-open" d="M4 7h16M4 12h16M4 17h16"/><path class="menu-icon-close hidden" d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden absolute inset-x-0 top-full bg-page border-b border-black/5 shadow-float" data-menu-panel>
+    <nav class="max-w-6xl mx-auto px-5 pt-1 pb-2 flex flex-col text-base font-medium" aria-label="Mobile">
+      <a href="/#results" class="py-3.5 border-b border-black/5 last:border-b-0 text-ink/80 hover:text-ink">Results</a>
+      <a href="/google-ads-audit" class="py-3.5 border-b border-black/5 last:border-b-0 text-ink/80 hover:text-ink">Free audit</a>
+      <a href="/google-ads-management-cost" class="py-3.5 border-b border-black/5 last:border-b-0 text-ink/80 hover:text-ink">Pricing</a>
+      <a href="/industries" class="py-3.5 border-b border-black/5 last:border-b-0 text-ink/80 hover:text-ink">Industries</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<article>
+  <header class="relative overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="max-w-3xl mx-auto px-5 md:px-6 pt-10 md:pt-16 pb-12 md:pb-16">
+      <nav aria-label="Breadcrumb" class="text-sm text-black/50 mb-8">
+        <ol class="flex flex-wrap items-center gap-2">
+          <li><a href="/" class="hover:text-ink underline-offset-4 hover:underline">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" class="text-black/70">Cost per lead calculator</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">Free tool</p>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.04]">Google Ads break-even cost per lead calculator</h1>
+      <p class="mt-6 text-lg md:text-xl text-black/70 leading-relaxed">Find the most you can pay for a lead before your Google Ads start losing money.</p>
+      <p class="mt-5 text-sm text-black/45">By CampaignPro · Updated <time datetime="2026-11-20">November 20, 2026</time></p>
+
+      <div class="mt-10 card p-6 md:p-8 border-l-4 !border-l-brand">
+        <p class="text-sm font-semibold uppercase tracking-[0.14em] text-brand mb-3">Short answer</p>
+        <p class="text-lg leading-relaxed">Your break-even cost per lead is the <strong>profit a new customer brings you, multiplied by the share of leads that become customers</strong>. Pay less per lead than that and the ads make money; pay more and every lead loses money.</p>
+      </div>
+    </div>
+  </header>
+
+  <section id="calculator" class="scroll-mt-24 pb-16 md:pb-20" aria-labelledby="calc-title">
+    <div class="bc-container">
+      <h2 id="calc-title" class="sr-only">Calculator</h2>
+      <div class="bc-wrap">
+
+        <form id="bc-form" class="card p-6 md:p-8" novalidate autocomplete="off">
+          <p class="bc-label-sm mb-5">Your numbers</p>
+
+          <div class="bc-field">
+            <label for="bc-revenue" class="lp-label">Average revenue per customer</label>
+            <div class="bc-affix has-pre">
+              <span class="bc-pre" aria-hidden="true">$</span>
+              <input id="bc-revenue" class="lp-input" type="text" inputmode="decimal" value="2000" data-example="true" aria-describedby="bc-revenue-hint bc-revenue-err">
+            </div>
+            <p id="bc-revenue-hint" class="bc-hint">What a typical new customer pays you for one job or purchase.</p>
+            <p id="bc-revenue-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-jobs" class="lp-label">Jobs or purchases per customer</label>
+            <input id="bc-jobs" class="lp-input" type="text" inputmode="decimal" value="1" data-example="true" aria-describedby="bc-jobs-hint bc-jobs-err">
+            <p id="bc-jobs-hint" class="bc-hint">Use 1 for one-off jobs. For repeat customers, enter how many jobs they typically book, for example 12 for monthly service over a year.</p>
+            <p id="bc-jobs-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-margin" class="lp-label">Profit margin on that revenue</label>
+            <div class="bc-affix has-suf">
+              <input id="bc-margin" class="lp-input" type="text" inputmode="decimal" value="40" data-example="true" aria-describedby="bc-margin-hint bc-margin-err">
+              <span class="bc-suf" aria-hidden="true">%</span>
+            </div>
+            <p id="bc-margin-hint" class="bc-hint">What you keep after labor, materials and other job costs, before ad spend.</p>
+            <p id="bc-margin-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-close" class="lp-label">Leads that become customers</label>
+            <div class="bc-affix has-suf">
+              <input id="bc-close" class="lp-input" type="text" inputmode="decimal" value="20" data-example="true" aria-describedby="bc-close-hint bc-close-err">
+              <span class="bc-suf" aria-hidden="true">%</span>
+            </div>
+            <p id="bc-close-hint" class="bc-hint">1 in 5 leads is 20%. Not sure? Count how many of your last 20 to 30 leads became paying customers.</p>
+            <p id="bc-close-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-divider">
+            <p class="bc-label-sm">Optional: check your current results</p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-cpl" class="lp-label">Your current cost per lead</label>
+            <div class="bc-affix has-pre">
+              <span class="bc-pre" aria-hidden="true">$</span>
+              <input id="bc-cpl" class="lp-input" type="text" inputmode="decimal" placeholder="e.g. 95" aria-describedby="bc-cpl-hint bc-cpl-err">
+            </div>
+            <p id="bc-cpl-hint" class="bc-hint">Google Ads cost divided by conversions that are real leads (calls or form fills).</p>
+            <p id="bc-cpl-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-spend" class="lp-label">Monthly ad spend</label>
+            <div class="bc-affix has-pre">
+              <span class="bc-pre" aria-hidden="true">$</span>
+              <input id="bc-spend" class="lp-input" type="text" inputmode="decimal" placeholder="e.g. 5000" aria-describedby="bc-spend-hint bc-spend-err">
+            </div>
+            <p id="bc-spend-hint" class="bc-hint">Enter this and your cost per lead to see a monthly estimate.</p>
+            <p id="bc-spend-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-field">
+            <label for="bc-fee" class="lp-label">Monthly management fee, if you pay one</label>
+            <div class="bc-affix has-pre">
+              <span class="bc-pre" aria-hidden="true">$</span>
+              <input id="bc-fee" class="lp-input" type="text" inputmode="decimal" placeholder="e.g. 1000" aria-describedby="bc-fee-err">
+            </div>
+            <p id="bc-fee-err" class="lp-error" hidden></p>
+          </div>
+
+          <div class="bc-actions">
+            <button type="button" id="bc-reset" class="bc-link">Reset to example</button>
+            <button type="button" id="bc-clear" class="bc-link">Clear all</button>
+          </div>
+          <p class="bc-note">The form starts with example numbers. Replace them with yours. Your numbers stay in your browser.</p>
+        </form>
+
+        <div id="bc-results" class="bc-sticky" aria-live="polite">
+          <noscript><div class="card p-6 md:p-8"><p class="text-black/65 leading-relaxed">This calculator needs JavaScript. As a rule of thumb: break-even cost per lead = average revenue per customer × profit margin × share of leads that become customers.</p></div></noscript>
+          <div id="bc-empty" class="card p-6 md:p-8" hidden>
+            <p class="bc-label-sm">Your break-even cost per lead</p>
+            <p class="mt-4 text-black/65 leading-relaxed">Fill in what a customer pays you, your profit margin and the share of leads that become customers. Your result appears here.</p>
+          </div>
+
+          <div id="bc-ready" class="card p-6 md:p-8" hidden>
+            <p class="bc-label-sm">Your break-even cost per lead</p>
+            <p id="bc-main" class="bc-big">$0</p>
+            <p class="mt-3 text-black/65 leading-relaxed">The most you can pay for one lead on ad spend alone before you lose money on the jobs it brings in.</p>
+
+            <dl class="bc-stats">
+              <div class="bc-stat"><dt>Target cost per lead for a healthy profit</dt><dd id="bc-target">$0</dd></div>
+              <div class="bc-stat"><dt>Break-even cost per customer</dt><dd id="bc-cac">$0</dd></div>
+              <div class="bc-stat"><dt>Break-even return on ad spend</dt><dd id="bc-roas">0×</dd></div>
+              <div class="bc-stat"><dt>Revenue each lead is worth</dt><dd id="bc-rpl">$0</dd></div>
+            </dl>
+
+            <div id="bc-verdict" class="bc-box" hidden>
+              <p class="bc-box-title" id="bc-verdict-label"></p>
+              <p class="bc-box-body" id="bc-verdict-body"></p>
+            </div>
+
+            <div id="bc-monthly" class="bc-box bc-monthly" hidden>
+              <p class="bc-box-title">Monthly estimate</p>
+              <dl class="bc-rows">
+                <div><dt>Leads</dt><dd id="bc-m-leads">0</dd></div>
+                <div><dt>New customers</dt><dd id="bc-m-customers">0</dd></div>
+                <div><dt>Revenue</dt><dd id="bc-m-revenue">$0</dd></div>
+                <div><dt>Gross profit before ad spend</dt><dd id="bc-m-gross">$0</dd></div>
+                <div id="bc-m-allin-row"><dt>All-in cost per lead (ads + fee)</dt><dd id="bc-m-allin">$0</dd></div>
+                <div id="bc-m-net-row" class="bc-net" data-sign="pos"><dt id="bc-m-net-label">Estimated monthly profit</dt><dd id="bc-m-net">$0</dd></div>
+              </dl>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-black/5">
+              <p class="font-semibold text-lg">Not sure what your real cost per lead is?</p>
+              <p class="mt-1.5 text-[15px] text-black/60 leading-relaxed">Get a free audit of your Google Ads account and see where the budget is going.</p>
+              <div class="mt-5 flex flex-col sm:flex-row sm:items-center gap-4">
+                <a href="#booking" data-cta="calculator_result" class="btn-primary px-6 py-3.5 justify-center">Get a free audit</a>
+                <a href="/google-ads-audit" class="text-sm font-medium text-black/70 hover:text-ink underline underline-offset-4 decoration-black/20">What the audit covers</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="prose-cp max-w-3xl mx-auto px-5 md:px-6 pb-8">
+
+    <h2>How the calculator works</h2>
+    <p>Break-even means the point where the profit from the customers your ads bring in exactly covers what you paid for the ads. The calculator works it out in three steps:</p>
+    <div class="formula">
+      <p><strong>Profit per customer</strong> = revenue per customer × jobs per customer × profit margin</p>
+      <p><strong>Break-even cost per lead</strong> = profit per customer × share of leads that become customers</p>
+      <p><strong>Break-even ROAS</strong> = 1 ÷ profit margin</p>
+    </div>
+    <p>The "target" cost per lead shown next to your break-even number is half of it. That is a rule of thumb, not a Google Ads rule: it leaves you half of the gross profit from each lead, so there is room for overhead, slow months and your own pay.</p>
+
+    <h2>Worked example</h2>
+    <p>The form starts with this example: a customer pays <strong>$2,000</strong> for one job, you keep a <strong>40%</strong> margin, and <strong>1 in 5 leads (20%)</strong> becomes a customer.</p>
+    <ul class="bullets">
+      <li>Profit per customer: $2,000 × 40% = <strong>$800</strong></li>
+      <li>Break-even cost per lead: $800 × 20% = <strong>$160</strong></li>
+      <li>Target cost per lead: half of that, <strong>$80</strong></li>
+      <li>Break-even ROAS: 1 ÷ 0.40 = <strong>2.5×</strong>, so $2.50 of revenue for every $1 of ads</li>
+    </ul>
+    <p>If this business pays $95 per lead, it is above the target but still profitable, with about $65 of profit left per lead. At $180 per lead, every lead would lose about $20.</p>
+
+    <h2>What to do with your number</h2>
+    <ol class="steps">
+      <li>
+        <h3>Find your real cost per lead</h3>
+        <p>In Google Ads, divide total cost by the number of conversions. Make sure those conversions are real leads, such as calls and form submissions, and not page views or button clicks.</p>
+      </li>
+      <li>
+        <h3>Compare it with break-even and target</h3>
+        <p>Enter it in the optional field above. Under your target is healthy, between target and break-even is thin, and above break-even loses money on each lead.</p>
+      </li>
+      <li>
+        <h3>If you are above break-even, fix the leaks first</h3>
+        <p>Cutting the budget rarely fixes a high cost per lead. Check conversion tracking, search terms and negative keywords, location targeting and whether the landing page matches the search.</p>
+      </li>
+      <li>
+        <h3>If you are well below break-even, scale carefully</h3>
+        <p>A low cost per lead can mean room to spend more. Raise budgets in steps and watch whether your cost per lead and lead quality hold up.</p>
+      </li>
+    </ol>
+
+    <h2>Typical cost per lead by industry</h2>
+    <p>Averages give context, but they are not a target. Your market, competition and account setup can move your costs well above or below them.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th scope="col">Industry</th><th scope="col">Average cost per lead</th><th scope="col">Guide</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Cleaning</th><td>about $47</td><td><a href="/google-ads-for-cleaning-companies">Google Ads for cleaning companies</a></td></tr>
+          <tr><th scope="row">Handyman</th><td>about $54</td><td><a href="/google-ads-for-handyman-businesses">Google Ads for handyman businesses</a></td></tr>
+          <tr><th scope="row">Landscaping</th><td>about $118</td><td><a href="/google-ads-for-landscaping-companies">Google Ads for landscaping companies</a></td></tr>
+          <tr><th scope="row">HVAC</th><td>about $128</td><td><a href="/google-ads-for-hvac-companies">Google Ads for HVAC companies</a></td></tr>
+          <tr><th scope="row">Plumbing and heating</th><td>about $129</td><td><a href="/google-ads-for-plumbers">Google Ads for plumbers</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-[15px]">Source: <a href="https://localiq.com/blog/home-services-search-advertising-benchmarks/" rel="noopener" target="_blank">LocaliQ, "2025 Search Ad Benchmarks for Home Services"</a> (US search campaigns, April 2024 to March 2025). See <a href="/industries">all industry guides</a>.</p>
+
+    <h2>Common mistakes</h2>
+    <ul class="bullets">
+      <li><strong>Using revenue instead of profit.</strong> A $2,000 job is not $2,000 of room to spend on ads.</li>
+      <li><strong>Counting every lead as a good lead.</strong> Spam, wrong-service and out-of-area calls lower your real lead-to-customer rate.</li>
+      <li><strong>Ignoring repeat business.</strong> If customers rebook, raise the number of jobs per customer. Otherwise you may pass on leads that would pay off.</li>
+      <li><strong>Forgetting the fee.</strong> If you pay an agency or freelancer, your all-in cost per lead is higher than what Google Ads shows.</li>
+    </ul>
+    <p>Want a second pair of eyes on your numbers? <a href="#booking">Book a free call</a> and get a free audit of your account or a launch plan if you're new to Google Ads. You can also read how <a href="/google-ads-management-cost">Google Ads management is priced</a>.</p>
+
+  </div>
+</article>
+
+<section id="faq" class="border-t border-black/5 bg-white/60 scroll-mt-16">
+  <div class="max-w-3xl mx-auto px-5 md:px-6 py-20 md:py-24">
+    <p class="eyebrow">FAQ</p>
+    <h2 class="h2 mb-10">Frequently asked questions</h2>
+    <div class="space-y-3">
+      <details class="faq card" open>
+        <summary>What is a good cost per lead on Google Ads?</summary>
+        <p>There is no single good number. A good cost per lead is one comfortably below your break-even cost per lead, which depends on what a customer is worth in profit and how many leads become customers. Industry averages give context: about $47 for cleaning services to about $129 for plumbing, according to LocaliQ's 2025 home services benchmarks. Your own break-even matters more than any average.</p>
+      </details>
+      <details class="faq card">
+        <summary>Should I enter revenue or profit?</summary>
+        <p>Enter the average revenue per customer and your profit margin separately. The margin should reflect what you keep after the cost of doing the work, such as labor, materials, fuel and subcontractors, before ad spend. Break-even depends on profit, not revenue.</p>
+      </details>
+      <details class="faq card">
+        <summary>What is break-even ROAS?</summary>
+        <p>Return on ad spend (ROAS) is revenue divided by ad spend. Break-even ROAS is 1 divided by your profit margin. With a 40% margin it is 2.5, meaning you need $2.50 of revenue for every $1 of ad spend just to cover the cost of the work and the ads.</p>
+      </details>
+      <details class="faq card">
+        <summary>I don't know my lead-to-customer rate. What should I enter?</summary>
+        <p>Look at your last 20 to 30 leads and count how many became paying customers, then divide customers by leads. If you can't tell yet, try several rates, such as 10%, 20% and 30%, to see how much your break-even cost per lead changes.</p>
+      </details>
+      <details class="faq card">
+        <summary>Does the calculator include my management fee?</summary>
+        <p>Only if you enter it. When you add your monthly ad spend, current cost per lead and an optional management fee, the calculator shows your all-in cost per lead and your estimated monthly profit after both.</p>
+      </details>
+      <details class="faq card">
+        <summary>How accurate are the results?</summary>
+        <p>The results are planning estimates based on the numbers you enter. Real results move with seasonality, lead quality and how quickly you follow up, so use the output as an upper limit on what you should pay per lead rather than a forecast.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="booking" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-28 scroll-mt-16 border-t border-black/5">
+  <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-10 lg:gap-14 items-start">
+    <div class="min-w-0 lg:sticky lg:top-28">
+      <p class="eyebrow">Book a call</p>
+      <h2 class="h2">Get more leads for your business.</h2>
+      <p class="mt-5 text-lg text-black/65 leading-relaxed">Pick a time that works for you. We'll look at your market, your services and what a lead is worth to you.</p>
+      <ul class="mt-8 space-y-4 text-[15px]">
+        <li class="flex gap-3"><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.5 3.2 3L15 7"/></svg><span><strong class="font-semibold">Already running ads?</strong> Get a free audit of your account.</span></li>
+        <li class="flex gap-3"><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.5 3.2 3L15 7"/></svg><span><strong class="font-semibold">New to Google Ads?</strong> Get a free launch plan and free setup.</span></li>
+        <li class="flex gap-3"><svg class="check" viewBox="0 0 20 20" aria-hidden="true"><path d="m5 10.5 3.2 3L15 7"/></svg><span><strong class="font-semibold">Flat fee from $1,000/month.</strong> Month-to-month, no setup fee.</span></li>
+      </ul>
+      <p class="mt-8 text-sm text-black/50">Since 2019 · $25M+ managed · US &amp; Canada</p>
+    </div>
+    <div id="calendar" class="min-w-0 card overflow-hidden p-1.5 md:p-3 shadow-float scroll-mt-4 md:scroll-mt-24">
+      <iframe
+        title="Book a free Google Ads strategy call with CampaignPro"
+        src="https://calendly.com/info-campaignpro/45min?embed_domain=www.campaignpro.click&embed_type=Inline&hide_gdpr_banner=1"
+        width="100%" height="760" loading="lazy" class="calendly-frame" style="border:0;display:block"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="border-t border-black/5 bg-white/60">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 py-12 flex flex-col md:flex-row justify-between gap-8">
+    <div>
+      <p class="text-xl font-semibold">Campaign<span class="text-brand">Pro</span></p>
+      <p class="text-black/60 text-sm max-w-xs mt-2">Google Ads management for small and medium businesses in the US and Canada, since 2019.</p>
+    </div>
+    <div class="flex flex-wrap gap-x-14 gap-y-8">
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Industries">
+        <p class="font-semibold mb-1">Industries</p>
+        <a href="/google-ads-for-hvac-companies" class="text-black/70 hover:text-ink">HVAC companies</a>
+        <a href="/google-ads-for-cleaning-companies" class="text-black/70 hover:text-ink">Cleaning companies</a>
+        <a href="/google-ads-for-plumbers" class="text-black/70 hover:text-ink">Plumbers</a>
+        <a href="/google-ads-for-accountants" class="text-black/70 hover:text-ink">Accountants &amp; CPAs</a>
+        <a href="/industries" class="text-black/70 hover:text-ink font-medium">All industries →</a>
+      </nav>
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Resources">
+        <p class="font-semibold mb-1">Resources</p>
+        <a href="/google-ads-audit" class="text-black/70 hover:text-ink">Free Google Ads audit</a>
+        <a href="/google-ads-management-cost" class="text-black/70 hover:text-ink">Google Ads management cost</a>
+        <a href="/google-ads-cost-per-lead-calculator" class="text-black/70 hover:text-ink">Cost per lead calculator</a>
+        <a href="/#faq" class="text-black/70 hover:text-ink">FAQ</a>
+      </nav>
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Follow us">
+        <p class="font-semibold mb-1">Follow</p>
+        <a href="https://www.linkedin.com/company/campaignpro-click" target="_blank" rel="noopener me" class="text-black/70 hover:text-ink">LinkedIn</a>
+        <a href="https://www.facebook.com/campaignproppc" target="_blank" rel="noopener me" class="text-black/70 hover:text-ink">Facebook</a>
+        <a href="https://x.com/Campaignpro_ppc" target="_blank" rel="noopener me" class="text-black/70 hover:text-ink">X (Twitter)</a>
+      </nav>
+      <nav class="flex flex-col gap-2 text-sm" aria-label="Company">
+        <p class="font-semibold mb-1">Company</p>
+        <a href="#booking" data-cta="footer" class="text-black/70 hover:text-ink">Book a call</a>
+        <a href="/privacy-policy" class="text-black/70 hover:text-ink">Privacy Policy</a>
+        <a href="/terms" class="text-black/70 hover:text-ink">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+  </div>
+  <div class="border-t border-black/5 py-6 text-center text-xs text-black/40">© 2026 CampaignPro. All rights reserved.</div>
+</footer>
+
+<div id="mobile-cta" class="md:hidden fixed inset-x-0 bottom-0 z-40 p-3 bg-page/95 backdrop-blur border-t border-black/5 translate-y-full transition-transform duration-300" aria-hidden="true">
+  <a href="#booking" data-cta="mobile_sticky" tabindex="-1" class="btn-primary w-full justify-center py-3.5">Book your free strategy call</a>
+</div>
+
+<script src="/assets/site.js?v=2"></script>
+<script src="/assets/cpl-calculator.js?v=1"></script>
+</body>
+</html>
